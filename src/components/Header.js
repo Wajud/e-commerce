@@ -6,13 +6,21 @@ import cartIcon from "../images/icon-cart.svg";
 import imageAvatar from "../images/image-avatar.png";
 
 import { useState } from "react";
+import CartCard from "./CartCard";
 
-const Header = () => {
+const Header = ({ showCartCard, setShowCartCard }) => {
   const [mobileMenu, setMobilemenu] = useState(false);
+
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   return (
     <div>
-      <div className="flex justify-between items-center px-4 py-2 md:py-4 md:border-b-2 border-gray-200 gap-4">
+      <div className="relative flex justify-between items-center px-4 py-2 md:py-4 md:border-b-2 border-gray-200 gap-4">
+        {showCartCard && (
+          <div className="bg-white hidden md:block font-semibold absolute w-60 top-16 right-8 shadow-lg rounded-md z-40">
+            <CartCard cardPy={20} />
+          </div>
+        )}
         <div className="flex gap-4 justify-start items-center py-2">
           <img
             src={hamburger}
@@ -32,7 +40,21 @@ const Header = () => {
           </div>
         </div>
         <div className="flex gap-4 items-center justify-end">
-          <img src={cartIcon} alt="cart-icon" />
+          <div className="relative">
+            <img
+              src={cartIcon}
+              alt="cart-icon"
+              onClick={() => setShowCartCard((showCartCard) => !showCartCard)}
+            />
+            {cartItemCount > 0 ? (
+              <p className="px-[0.65rem] rounded-2xl text-white font-semibold bg-orange-500 absolute -top-4 left-2">
+                {cartItemCount}
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+
           <img
             src={imageAvatar}
             alt="avatar"

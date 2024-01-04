@@ -7,11 +7,17 @@ import imageProductThree from "../images/image-product-3.jpg";
 import imageProductFour from "../images/image-product-4.jpg";
 import Counter from "../components/Counter";
 import AddToCart from "../components/AddToCart";
+import CartCard from "../components/CartCard";
 
-const MainSection = () => {
+const MainSection = ({ showCartCard }) => {
   return (
     <div className="pb-8 md:flex gap-8 justify-center items-center md:pb-8 md:pt-12 md:w-[90%] mx-auto">
       <div className="relative md:w-1/2 md:max-w-[27rem]">
+        {showCartCard && (
+          <div className="bg-white shadow-lg rounded-md font-semibold w-[90%] mx-auto absolute top-4 left-1/2 -translate-x-1/2 z-20 md:hidden">
+            <CartCard cardPy={40} />
+          </div>
+        )}
         <img
           src={imageProductOne}
           alt="product-1"
